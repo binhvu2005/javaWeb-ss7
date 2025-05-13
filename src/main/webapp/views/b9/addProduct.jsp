@@ -8,21 +8,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<head><title>Thêm/Sửa Sản phẩm</title></head>
+<head>
+  <title>Thêm sản phẩm</title>
+</head>
 <body>
-<h2>${product.id == 0 ? "Thêm sản phẩm" : "Chỉnh sửa sản phẩm"}</h2>
-<form action="${product.id == 0 ? 'b9/products/save' : 'b9/products/update'}" method="post">
-  <input type="hidden" name="id" value="${product.id}"/>
-  Tên: <input type="text" name="name" value="${product.name}"/><br/>
-  Giá: <input type="text" name="price" value="${product.price}"/><br/>
-  Danh mục:
+<h2>Thêm sản phẩm mới</h2>
+<form action="${pageContext.request.contextPath}/b9/products/save" method="post">
+  Tên sản phẩm: <input type="text" name="name" required /><br/>
+  Giá: <input type="number" step="0.01" name="price" required /><br/>
+  Loại:
   <select name="categoryId">
-    <c:forEach var="c" items="${categories}">
-      <option value="${c.id}" ${c.id == product.categoryId ? 'selected' : ''}>${c.name}</option>
+    <c:forEach var="cat" items="${categories}">
+      <option value="${cat.id}">${cat.name}</option>
     </c:forEach>
   </select><br/>
   <button type="submit">Lưu</button>
 </form>
-<a href="b9/products">Quay lại</a>
+<c:if test="${not empty message}">
+  <div style="color:green;">${message}</div>
+</c:if>
 </body>
 </html>

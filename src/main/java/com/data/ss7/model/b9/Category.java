@@ -1,4 +1,4 @@
-package com.data.ss7.model;
+package com.data.ss7.model.b9;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
